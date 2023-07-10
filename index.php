@@ -6,67 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css">
+    <link rel="stylesheet" href="view/resources/css/mmarketdemostyles.css">
     <title>MiniMarket Demo - PHP</title>
 </head>
 
 <body>
-    <style>
-        /* Estilos generales */
-        /* Estilos generales */
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            display: flex;
-        }
-
-        /* Estilos del menú */
-        .menu {
-            width: 200px;
-            /* Ancho del menú */
-            background-color: #f2f2f2;
-        }
-
-        .menu ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .menu ul li a {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            color: #333;
-        }
-
-        .menu ul li a:hover {
-            background-color: #ddd;
-        }
-
-        /* Estilos del panel */
-        .panel {
-            flex: 1;
-            /* El panel ocupa todo el espacio restante */
-            padding: 20px;
-            background-color: #fff;
-        }
-
-        /* Estilos responsivos */
-        @media screen and (max-width: 600px) {
-            .container {
-                flex-direction: column;
-                /* Cambia el diseño a una columna en pantallas pequeñas */
-            }
-
-            .menu {
-                width: 100%;
-                /* Menú ocupa todo el ancho en pantallas pequeñas */
-            }
-        }
-    </style>
     <div class="container">
         <div class="menu">
             <ul>
