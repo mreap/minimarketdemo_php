@@ -1,6 +1,8 @@
 <?php
 require_once '../model/bdd/Database.php';
 require_once '../model/dtos/SegUsuario.php';
+require_once '../model/auditoria/ManagerAuditoria.php';
+
 class ManagerSeguridades{
     public function findSegUsuarioByCorreo($correo){
         //Obtenemos la informacion del producto especifico:
@@ -32,7 +34,10 @@ class ManagerSeguridades{
         //Extraemos el registro especifico:
         $dato = $consulta->fetch(PDO::FETCH_ASSOC);
         //Verificamos si encontró datos:
+        $managerAuditoria=new ManagerAuditoria();
         if($consulta->rowCount()==0){
+            //pista de auditoria:
+            $managerAuditoria->generarEventoBitacora($correo,"Credenciales incorrectas.");
             throw new Exception("Credenciales incorrectas.");
         }
         //Transformamos el registro obtenido a objeto:
@@ -42,7 +47,8 @@ class ManagerSeguridades{
         $segUsuario->nombres=$dato['nombres'];
         $segUsuario->correo= $dato['correo'];
         $segUsuario->autenticado=true;
-        Database::disconnect();
+        //pista de auditoria:
+        $managerAuditoria->generarEventoBitacora($segUsuario->correo,"Login correcto.");
         return $segUsuario;
     }
     public function verificarAutenticado(){
@@ -54,5 +60,15 @@ class ManagerSeguridades{
                 return false;
             }
         }
+    }
+    public function cerrarSesion(){
+        if(!isset($_SESSION)){
+            session_start();
+        }
+        //pista de auditoria:
+        $managerAuditoria=new ManagerAuditoria();
+        $correo=$_SESSION['correo'];
+        $managerAuditoria->generarEventoBitacora($correo,"Cerrar sesión.");           
+        session_abort();
     }
 }
