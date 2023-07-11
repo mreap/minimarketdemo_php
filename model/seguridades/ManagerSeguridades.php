@@ -54,11 +54,11 @@ class ManagerSeguridades{
     public function verificarAutenticado(){
         if(!isset($_SESSION)){
             session_start();
-            if(isset($_SESSION['autenticado'])){
-                return $_SESSION['autenticado'];
-            }else{
-                return false;
-            }
+        }
+        if(isset($_SESSION['autenticado'])){
+            return $_SESSION['autenticado'];
+        }else{
+            return false;
         }
     }
     public function cerrarSesion(){
