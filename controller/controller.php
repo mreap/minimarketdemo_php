@@ -4,6 +4,8 @@ if(!isset($_SESSION)){
     session_start();
 }
 require_once '../model/seguridades/ManagerSeguridades.php';
+require_once '../model/auditoria/ManagerAuditoria.php';
+require_once '../model/dtos/AudBitacora.php';
 
 $opcion=$_POST['opcion'];
 
@@ -31,6 +33,12 @@ switch($opcion){
         $managerSeguridades=new ManagerSeguridades();
         $managerSeguridades->cerrarSesion();
         header('Location: ../view/login.php');
+        break;
+    case "consultarBitacora":
+        $managerAuditoria=new ManagerAuditoria();
+        $listado=$managerAuditoria->findAllBitacora();
+        $_SESSION['listadoBitacora']=serialize($listado);
+        header('Location: ../view/auditoria/auditor/index.php');
         break;
     default:
 }

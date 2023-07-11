@@ -15,4 +15,27 @@ class ManagerAuditoria{
         $consulta->execute(array($fechaEvento,$correoOrigen,$mensajeEvento));
         Database::disconnect();
     }
+    public function findAllBitacora(){
+        $pdo = Database::connect();
+        $sql = "select * from aud_bitacora order by id_aud_bitacora";
+        $resultado = $pdo->query($sql);
+        //transformamos los registros en objetos de tipo Producto:
+        $listado = array();
+        foreach ($resultado as $res){
+            $bitacora = new AudBitacora();
+            $bitacora->idAudBitacora=$res['id_aud_bitacora'];
+            $bitacora->fechaEvento=$res['fecha_evento'];
+            $bitacora->correoOrigen=$res['correo_origen'];
+            $bitacora->mensajeEvento=$res['mensaje_evento'];
+            array_push($listado, $bitacora);
+        }
+        Database::disconnect();
+        if(!isset($_SESSION)){
+            session_start();
+        }
+        $correo=$_SESSION['correo'];
+        $this->generarEventoBitacora($correo,"Consulta de findAllBitacora.");
+        //retornamos el listado resultante:
+        return $listado;
+    }
 }
