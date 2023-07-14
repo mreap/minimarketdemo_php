@@ -23,7 +23,7 @@
             <h5>Módulos:</h5>
             <ul>
                 <li><a href="auditoria/auditor/index.php">Auditoría</a></li>
-                <li><a href="#">Seguridades</a></li>
+                <li><a href="seguridades/administrador/index.php">Seguridades</a></li>
                 <li><a href="#">Parámetros</a></li>
                 <li><a href="#">Otro</a></li>
                 <form action="../controller/controller.php" method="POST">
