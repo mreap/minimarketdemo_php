@@ -40,6 +40,7 @@ class ManagerSeguridades{
             $managerAuditoria->generarEventoBitacora($correo,"Credenciales incorrectas.");
             throw new Exception("Credenciales incorrectas.");
         }
+        
         //Transformamos el registro obtenido a objeto:
         $segUsuario=new SegUsuario();
         $segUsuario->idSegUsuario=$dato['id_seg_usuario'];
